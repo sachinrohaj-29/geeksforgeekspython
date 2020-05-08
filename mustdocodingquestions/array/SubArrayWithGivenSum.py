@@ -1,18 +1,33 @@
-import array
-
 class SubArrayWithGivenSum:
 
-    def __init__(self, name, age):
-        self.name = name
-        self.age = age
+    def work(self):
+        total_test = int(input())
 
-    def tryingFunc(self):
-        print("sachin rohaj", self.age)
+        while total_test > 0 :
+            size_sum = [int(entry) for entry in input().strip().split()]
+            array_size = size_sum[0]
+            expected_sum = size_sum[1]
 
-abc = array.array('i', [1,2,3,4])
-print(type(abc))
+            given_array = [int(entry) for entry in input().strip().split()]
+            flag, start, current_index, sum_ = True, 0, 0, 0
 
-for i in range (0,2):
-    print(abc[i])
-ss = SubArrayWithGivenSum("sachin", 31)
-ss.tryingFunc()
+            while flag:
+                sum_ = sum_ + given_array[current_index]
+
+                # This is important, rather than an if condition use a loop
+                while sum_ > expected_sum and current_index < array_size:
+                    sum_ = sum_ - given_array[start]
+                    start += 1
+                if sum_ == expected_sum:
+                    print(start+1, current_index+1)
+                    flag = False
+                current_index += 1
+                if current_index == array_size:
+                    flag = False
+            if sum_ != expected_sum:
+                print(-1)
+            total_test -= 1
+
+
+if __name__ == "__main__":
+    SubArrayWithGivenSum.work(SubArrayWithGivenSum())
